@@ -1,10 +1,14 @@
-version: '3'
+version: '3.8'
 services:
 
   php:
     image: willianvalerio/dd-php
     container_name: php
     working_dir: /var/www
+    volumes:
+      - type: bind
+        source: ./
+        target: /var/www/
     networks:
       - app-network
     ports:

@@ -128,4 +128,25 @@ return [
 
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | MongoDB Databases
+    |--------------------------------------------------------------------------
+    |
+    | MongoDB is a document database with the scalability and flexibility
+    | that you want with the querying and indexing that you need.
+    | Mongolid Laravel use this config to starting querying right now.
+    |
+    */
+
+    'mongodb' => [
+        'default' => [
+            'host'     => env('MONGO_HOST', '127.0.0.1'),
+            'port'     => env('MONGO_PORT_NUMBER', 27017),
+            'database' => env('MONGO_DATABASE', 'my_database'),
+            'username' => env('MONGO_USERNAME', null),
+            'password' => env('MONGO_PASSWORD', null),
+        ],
+    ],
+
 ];

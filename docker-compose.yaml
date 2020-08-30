@@ -4,16 +4,15 @@ services:
   php:
     image: willianvalerio/dd-php
     container_name: php
-    working_dir: /var/www
+    working_dir: /var/www/html
     volumes:
       - type: bind
         source: ./
-        target: /var/www/
+        target: /var/www/html
     networks:
       - app-network
     ports:
-      - "8000:80"
-    
+      - "8000:80"    
 
   mongo:
     image: mongo

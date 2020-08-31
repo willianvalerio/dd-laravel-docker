@@ -4,6 +4,11 @@ services:
   php:
     image: willianvalerio/dd-php
     container_name: php
+    environment:
+      - DD_SERVICE=laravel
+      - DD_VERSION=1.0
+      - DD_AGENT_HOST=datadog
+      - DD_ENV=laravel
     working_dir: /var/www/html
     volumes:
       - type: bind
@@ -27,6 +32,27 @@ services:
     container_name: redis
     ports:
       - "6379:6379"
+    networks:
+      - app-network
+
+  datadog:
+    image: "datadog/agent"
+    container_name: dd-agent
+    environment:
+      - DD_API_KEY=${DD_API_KEY}
+      - DD_APM_ENABLED=true
+      - DD_LOGS_ENABLED=true
+      - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
+      - DD_PROCESS_AGENT_ENABLED=true
+      - DD_ENV=laravel
+      - DD_LOG_LEVEL=WARN
+    ports:
+      - "8126:8126"
+      - "8125:8125"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
     networks:
       - app-network
 

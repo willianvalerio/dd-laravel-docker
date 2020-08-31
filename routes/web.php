@@ -10,7 +10,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Illuminate\Support\Facades\Redis;
+
+
 
 Route::get('/', function () {
+    
+    #Tests purpose
+    $redis = Redis::connection();
+    $redis->incr('visitantes');
+
+
     return view('welcome');
 });
